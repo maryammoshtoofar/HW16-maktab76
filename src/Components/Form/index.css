@@ -1,0 +1,38 @@
+form {
+  background: radial-gradient(#1fe4f5, #3fbafe);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  border-radius: 10px;
+  padding: 25px;
+  margin-top: 30px;
+}
+h3 {
+  color: rgb(68, 65, 65);
+  margin-bottom: 20px;
+}
+
+input,
+select,
+button {
+  text-align: right;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+
+select {
+  width: 100%;
+}
+
+button {
+  background-color: rgb(68, 65, 65);
+  color: white;
+  padding: 10px 50px;
+}
+
+/* .error-message {
+  visibility: hidden;
+} */
