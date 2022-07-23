@@ -1,15 +1,18 @@
 form {
-  background: radial-gradient(#1fe4f5, #3fbafe);
+  background-color: rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
   align-items: center;
   border-radius: 10px;
   padding: 25px;
   margin-top: 30px;
+  width: 400px;
+  margin: auto;
+  margin-top: 20px;
 }
 h3 {
-  color: rgb(68, 65, 65);
+  color: rgb(255, 255, 255);
   margin-bottom: 20px;
 }
 
@@ -21,18 +24,22 @@ button {
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
+  width: 80%;
 }
 
 select {
-  width: 100%;
+  margin-bottom: 3px;
 }
 
-button {
-  background-color: rgb(68, 65, 65);
-  color: white;
-  padding: 10px 50px;
+.addBtn {
+  background-color: #0f1631;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
 }
 
-/* .error-message {
-  visibility: hidden;
-} */
+input[disabled] {
+  background-color: rgb(192, 191, 191);
+  color: rgb(165, 164, 164);
+  cursor: not-allowed;
+}

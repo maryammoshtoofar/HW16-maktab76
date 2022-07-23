@@ -2,11 +2,15 @@ import React, { Component } from "react";
 import ContactCard from "./Components/ContactCard";
 import Form from "./Components/Form";
 import "./App.css";
+import { v4 as uuidv4 } from "uuid";
 
 class App extends Component {
   constructor() {
     super();
-    this.state = { contacts: [] };
+    this.state = {
+      contacts: [],
+      showModal: false,
+    };
   }
 
   addContact = (e) => {
@@ -18,8 +22,27 @@ class App extends Component {
       phone: phone.value,
       relation: relation.value,
       email: email.value,
+      id: uuidv4(),
     };
     this.setState({ contacts: [...this.state.contacts, contact] });
+  };
+
+  DeleteCard = (id) => {
+    console.log(id);
+    const { contacts } = this.state;
+    this.setState(
+      {
+        contacts: contacts.filter((contact) => contact.id !== id),
+      },
+      () => this.CloseModal()
+    );
+  };
+
+  OpenModal = () => {
+    this.setState({ showModal: true });
+  };
+  CloseModal = () => {
+    this.setState({ showModal: false });
   };
 
   render() {
@@ -27,8 +50,15 @@ class App extends Component {
       <div className="container">
         <Form contacts={this.state.contacts} addContact={this.addContact} />
         <div className="contactsBody">
-          {this.state.contacts.map((contact) => (
-            <ContactCard contact={contact} />
+          {this.state.contacts.map((contact, i) => (
+            <ContactCard
+              key={i}
+              contact={contact}
+              DeleteCard={this.DeleteCard}
+              OpenModal={this.OpenModal}
+              CloseModal={this.CloseModal}
+              showModal={this.state.showModal}
+            />
           ))}
         </div>
       </div>

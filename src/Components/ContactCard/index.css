@@ -24,25 +24,11 @@
   position: relative;
   text-decoration: none;
   color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
 }
 .card__icons {
   display: flex;
   font-size: 12px;
-}
-
-.icon__link::after {
-  position: absolute;
-  top: 25px;
-  left: 0;
-  content: "";
-  width: 0%;
-  height: 3px;
-  background-color: rgba(255, 255, 255, 0.6);
-  transition: all 0.5s;
-}
-
-.icon__link:hover::after {
-  width: 100%;
 }
 
 .card__icons {

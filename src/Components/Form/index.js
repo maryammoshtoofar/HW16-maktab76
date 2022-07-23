@@ -92,22 +92,6 @@ class Form extends React.Component {
     }
   };
 
-  // Add Contatct
-
-  // addContact = (e) => {
-  //   e.preventDefault();
-  //   console.log(e.target.elements);
-  //   const { name, familyName, phone, relation, email } = e.target.elements;
-  //   const contact = {
-  //     name: name.value,
-  //     familyName: familyName.value,
-  //     phone: phone.value,
-  //     relation: relation.value,
-  //     email: email.value,
-  //   };
-  //   this.setState({ contactInfo: [...this.state.contactInfo, contact] },()=>console.log(this.state.contactInfo));
-  // };
-
   render() {
     const {
       fname,
@@ -177,6 +161,7 @@ class Form extends React.Component {
         ></input>
         <div className="error-message">{this.state.errorEmail}</div>
         <input
+          className="addBtn"
           type="submit"
           value="اضافه کردن"
           disabled={!isValid || defaultError}
