@@ -11,6 +11,7 @@ class Form extends React.Component {
       errorFamilyName: "",
       errorPhone: "",
       errorEmail: "",
+      errorSelect: "",
       contactInfo: [],
     };
   }
@@ -26,6 +27,7 @@ class Form extends React.Component {
     this.validateFamilyName();
     this.validatePhone();
     this.validateEmail();
+    this.validateSelect();
   };
 
   validateName = () => {
@@ -80,15 +82,23 @@ class Form extends React.Component {
     }
   };
 
-  render() {
-    const { fname, familyName, phone, relation, email } = this.props;
+  validateSelect = () => {
+    const { relation } = this.props;
+    if (relation === "") this.setState({ errorSelect: ".نسبت اجباری است" });
+    else this.setState({ errorSelect: "" });
+  };
 
-    const { errorName, errorFamilyName, errorPhone, errorEmail } = this.state;
+  render() {
+    const { fname, familyName, phone, relation, email, formBtn } = this.props;
+
+    const { errorName, errorFamilyName, errorPhone, errorEmail, errorSelect } =
+      this.state;
     const isValid =
       errorName === "" &&
       errorFamilyName === "" &&
       errorPhone === "" &&
       errorEmail === "" &&
+      errorSelect === "" &&
       relation !== "";
     return (
       <form onSubmit={(e) => this.props.addContact(e)}>
@@ -124,12 +134,12 @@ class Form extends React.Component {
           {this.state.errorPhone}
         </div>
         <select
-          onChange={(e) => this.props.handelChange(e, this.validate)}
-          onInput={(e) => this.setState({ courseValue: e.target.value })}
+          value={relation}
+          onInput={(e) => this.props.handelChange(e, this.validate)}
           name="relation"
           required
         >
-          <option value="" disabled selected>
+          <option value="" disabled selected hidden>
             نسبت
           </option>
           <option>اعضای خانواده</option>
@@ -137,6 +147,9 @@ class Form extends React.Component {
           <option>همکار</option>
           <option>فامیل</option>
         </select>
+        <div className={this.state.errorSelect ? "error-message" : "empty"}>
+          {this.state.errorSelect}
+        </div>
         <input
           value={email}
           onChange={(e) => this.props.handelChange(e, this.validate)}
@@ -150,7 +163,7 @@ class Form extends React.Component {
         <input
           className="addBtn"
           type="submit"
-          value="اضافه کردن"
+          value={formBtn}
           disabled={!isValid || defaultError}
         ></input>
       </form>
@@ -158,5 +171,3 @@ class Form extends React.Component {
   }
 }
 export default Form;
-
-// className={this.state.errorEmail ? "error-message": "empty"}

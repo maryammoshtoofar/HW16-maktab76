@@ -15,8 +15,20 @@ class App extends Component {
       phone: "",
       relation: "",
       email: "",
+      formBtn: "اضافه کردن",
+      currentContact: {},
     };
   }
+
+  // Clear Inputs
+  clearInputs = (btnText = "اضافه کردن") => {
+    this.setState({ fname: "" });
+    this.setState({ familyName: "" });
+    this.setState({ phone: "" });
+    this.setState({ relation: "" });
+    this.setState({ email: "" });
+    this.setState({ formBtn: btnText });
+  };
 
   // Control Inputs
 
@@ -27,21 +39,41 @@ class App extends Component {
 
   // ADD DELETE EDIT Functions
   addContact = (e) => {
+    const { currentContact, contacts } = this.state;
     e.preventDefault();
     const { fname, familyName, phone, relation, email } = e.target.elements;
-    const contact = {
-      fname: fname.value,
-      familyName: familyName.value,
-      phone: phone.value,
-      relation: relation.value,
-      email: email.value,
-      id: uuidv4(),
-    };
-    this.setState({ contacts: [...this.state.contacts, contact] });
+    if (this.state.formBtn === "اضافه کردن") {
+      const newContact = {
+        fname: fname.value,
+        familyName: familyName.value,
+        phone: phone.value,
+        relation: relation.value,
+        email: email.value,
+        id: uuidv4(),
+      };
+      this.setState({ contacts: [...contacts, newContact] });
+      this.clearInputs();
+    } else if (this.state.formBtn === "ویرایش") {
+      const editedContact = {
+        fname: fname.value,
+        familyName: familyName.value,
+        phone: phone.value,
+        relation: relation.value,
+        email: email.value,
+        id: currentContact.id,
+      };
+      const editingContact = contacts.find(
+        (contact) => contact.id === editedContact.id
+      );
+      const newContacts = contacts;
+      newContacts.splice(contacts.indexOf(editingContact), 1, editedContact);
+      this.setState({ contacts: newContacts }, () =>
+        this.clearInputs("اضافه کردن")
+      );
+    }
   };
 
   DeleteCard = (id) => {
-    console.log(id);
     const { contacts } = this.state;
     this.setState(
       {
@@ -51,12 +83,22 @@ class App extends Component {
     );
   };
 
-  // EditContact = (id) => {
-  //   const selectedContact = this.state.contacts.find(
-  //     (contact) => contact.id === id
-  //   );
-  //   console.log(selectedContact);
-  // };
+  EditContact = (id) => {
+    const selectedContact = this.state.contacts.find(
+      (contact) => contact.id === id
+    );
+    this.setState({ currentContact: selectedContact });
+    const { fname, familyName, phone, relation, email } = selectedContact;
+    this.setState({ formBtn: "ویرایش" });
+    this.setState({ fname: fname });
+    this.setState({ familyName: familyName });
+    this.setState({ phone: phone });
+    this.setState({ relation: relation });
+    this.setState({ email: email });
+
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  };
 
   // Modal Functions
 
@@ -68,8 +110,16 @@ class App extends Component {
   };
 
   render() {
-    const { fname, familyName, phone, relation, email, contacts, showModal } =
-      this.state;
+    const {
+      fname,
+      familyName,
+      phone,
+      relation,
+      email,
+      contacts,
+      showModal,
+      formBtn,
+    } = this.state;
     return (
       <div className="container">
         <Form
@@ -81,6 +131,7 @@ class App extends Component {
           relation={relation}
           email={email}
           handelChange={this.handelChange}
+          formBtn={formBtn}
         />
         <div className="contactsBody">
           {contacts.map((contact, i) => (

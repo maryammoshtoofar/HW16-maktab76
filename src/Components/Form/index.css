@@ -50,6 +50,10 @@ input[disabled] {
   animation: shake-horizontal 0.8s linear both;
 }
 
+select option:first-child {
+  color: rgb(165, 164, 164);
+}
+
 @-webkit-keyframes shake-horizontal {
   0%,
   100% {
