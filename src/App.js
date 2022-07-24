@@ -3,6 +3,8 @@ import ContactCard from "./Components/ContactCard";
 import Form from "./Components/Form";
 import "./App.css";
 import { v4 as uuidv4 } from "uuid";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class App extends Component {
   constructor() {
@@ -53,6 +55,15 @@ class App extends Component {
       };
       this.setState({ contacts: [...contacts, newContact] });
       this.clearInputs();
+      toast.success("مخاطب اضافه شد", {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } else if (this.state.formBtn === "ویرایش") {
       const editedContact = {
         fname: fname.value,
@@ -81,6 +92,15 @@ class App extends Component {
       },
       () => this.CloseModal()
     );
+    toast.success("مخاطب پاک شد", {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   EditContact = (id) => {
@@ -146,6 +166,17 @@ class App extends Component {
             />
           ))}
         </div>
+        <ToastContainer
+          position="top-left"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </div>
     );
   }
