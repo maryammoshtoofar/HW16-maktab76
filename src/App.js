@@ -10,9 +10,22 @@ class App extends Component {
     this.state = {
       contacts: [],
       showModal: false,
+      fname: "",
+      familyName: "",
+      phone: "",
+      relation: "",
+      email: "",
     };
   }
 
+  // Control Inputs
+
+  handelChange = (e, validateFunction) => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value }, validateFunction);
+  };
+
+  // ADD DELETE EDIT Functions
   addContact = (e) => {
     e.preventDefault();
     const { fname, familyName, phone, relation, email } = e.target.elements;
@@ -38,13 +51,6 @@ class App extends Component {
     );
   };
 
-  OpenModal = () => {
-    this.setState({ showModal: true });
-  };
-  CloseModal = () => {
-    this.setState({ showModal: false });
-  };
-
   // EditContact = (id) => {
   //   const selectedContact = this.state.contacts.find(
   //     (contact) => contact.id === id
@@ -52,19 +58,39 @@ class App extends Component {
   //   console.log(selectedContact);
   // };
 
+  // Modal Functions
+
+  OpenModal = () => {
+    this.setState({ showModal: true });
+  };
+  CloseModal = () => {
+    this.setState({ showModal: false });
+  };
+
   render() {
+    const { fname, familyName, phone, relation, email, contacts, showModal } =
+      this.state;
     return (
       <div className="container">
-        <Form contacts={this.state.contacts} addContact={this.addContact} />
+        <Form
+          contacts={contacts}
+          addContact={this.addContact}
+          fname={fname}
+          familyName={familyName}
+          phone={phone}
+          relation={relation}
+          email={email}
+          handelChange={this.handelChange}
+        />
         <div className="contactsBody">
-          {this.state.contacts.map((contact, i) => (
+          {contacts.map((contact, i) => (
             <ContactCard
               key={i}
               contact={contact}
               DeleteCard={this.DeleteCard}
               OpenModal={this.OpenModal}
               CloseModal={this.CloseModal}
-              showModal={this.state.showModal}
+              showModal={showModal}
               EditContact={this.EditContact}
             />
           ))}

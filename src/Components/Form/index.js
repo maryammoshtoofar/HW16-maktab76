@@ -7,11 +7,6 @@ class Form extends React.Component {
   constructor() {
     super();
     this.state = {
-      fname: "",
-      familyName: "",
-      phone: "",
-      relation: "",
-      email: "",
       errorName: "",
       errorFamilyName: "",
       errorPhone: "",
@@ -24,13 +19,6 @@ class Form extends React.Component {
     defaultError = false;
   }
 
-  // Control Inputs
-
-  handelChange = (e) => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value }, this.validate);
-  };
-
   // Validate Form
 
   validate = () => {
@@ -41,7 +29,7 @@ class Form extends React.Component {
   };
 
   validateName = () => {
-    const { fname } = this.state;
+    const { fname } = this.props;
     if (fname === "") this.setState({ errorName: ".نام اجباری است" });
     else if (/\d/.test(fname)) {
       this.setState({ errorName: ".نام نباید شامل اعداد باشد" });
@@ -53,7 +41,7 @@ class Form extends React.Component {
   };
 
   validateFamilyName = () => {
-    const { familyName } = this.state;
+    const { familyName } = this.props;
     if (familyName === "")
       this.setState({ errorFamilyName: ".نام خانوادگی اجباری است" });
     else if (/\d/.test(familyName)) {
@@ -66,7 +54,7 @@ class Form extends React.Component {
   };
 
   validatePhone = () => {
-    const { phone } = this.state;
+    const { phone } = this.props;
     if (phone === "") this.setState({ errorPhone: "شماره تماس اجباری است" });
     else if (!/\d/.test(phone)) {
       this.setState({ errorPhone: "شماره تماس نباید شامل حروف باشد" });
@@ -80,7 +68,7 @@ class Form extends React.Component {
   validateEmail = () => {
     const validRegex =
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    const { email } = this.state;
+    const { email } = this.props;
     if (email === "") {
       this.setState({ errorEmail: ".ایمیل اجباری است" });
     } else if (!email.match(validRegex)) {
@@ -93,17 +81,9 @@ class Form extends React.Component {
   };
 
   render() {
-    const {
-      fname,
-      familyName,
-      phone,
-      relation,
-      email,
-      errorName,
-      errorFamilyName,
-      errorPhone,
-      errorEmail,
-    } = this.state;
+    const { fname, familyName, phone, relation, email } = this.props;
+
+    const { errorName, errorFamilyName, errorPhone, errorEmail } = this.state;
     const isValid =
       errorName === "" &&
       errorFamilyName === "" &&
@@ -115,7 +95,7 @@ class Form extends React.Component {
         <h3>وب اپلیکیشن مدیریت مخاطبین</h3>
         <input
           value={fname}
-          onChange={this.handelChange}
+          onChange={(e) => this.props.handelChange(e, this.validate)}
           type="text"
           name="fname"
           placeholder="...نام"
@@ -125,7 +105,7 @@ class Form extends React.Component {
         </div>
         <input
           value={familyName}
-          onChange={this.handelChange}
+          onChange={(e) => this.props.handelChange(e, this.validate)}
           type="text"
           name="familyName"
           placeholder="...نام خانوادگی"
@@ -135,7 +115,7 @@ class Form extends React.Component {
         </div>
         <input
           value={phone}
-          onChange={this.handelChange}
+          onChange={(e) => this.props.handelChange(e, this.validate)}
           type="text"
           name="phone"
           placeholder="...شماره تماس"
@@ -144,7 +124,7 @@ class Form extends React.Component {
           {this.state.errorPhone}
         </div>
         <select
-          onChange={this.handelChange}
+          onChange={(e) => this.props.handelChange(e, this.validate)}
           onInput={(e) => this.setState({ courseValue: e.target.value })}
           name="relation"
           required
@@ -159,7 +139,7 @@ class Form extends React.Component {
         </select>
         <input
           value={email}
-          onChange={this.handelChange}
+          onChange={(e) => this.props.handelChange(e, this.validate)}
           type="email"
           name="email"
           placeholder="...ایمیل"
