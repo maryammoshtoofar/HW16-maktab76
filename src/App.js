@@ -45,6 +45,13 @@ class App extends Component {
     this.setState({ showModal: false });
   };
 
+  // EditContact = (id) => {
+  //   const selectedContact = this.state.contacts.find(
+  //     (contact) => contact.id === id
+  //   );
+  //   console.log(selectedContact);
+  // };
+
   render() {
     return (
       <div className="container">
@@ -58,6 +65,7 @@ class App extends Component {
               OpenModal={this.OpenModal}
               CloseModal={this.CloseModal}
               showModal={this.state.showModal}
+              EditContact={this.EditContact}
             />
           ))}
         </div>

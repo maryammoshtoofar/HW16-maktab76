@@ -1,6 +1,6 @@
 .card {
   text-align: right;
-  background: radial-gradient(#1fe4f5, #3fbafe);
+  background-color: rgba(0, 0, 0, 0.2);
   margin: 20px;
   padding: 20px;
   width: 400px;

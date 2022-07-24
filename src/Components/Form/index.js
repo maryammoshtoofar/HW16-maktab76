@@ -118,10 +118,11 @@ class Form extends React.Component {
           onChange={this.handelChange}
           type="text"
           name="fname"
-          // value={}
           placeholder="...نام"
         ></input>
-        <div className="error-message">{this.state.errorName}</div>
+        <div className={this.state.errorName ? "error-message" : "empty"}>
+          {this.state.errorName}
+        </div>
         <input
           value={familyName}
           onChange={this.handelChange}
@@ -129,7 +130,9 @@ class Form extends React.Component {
           name="familyName"
           placeholder="...نام خانوادگی"
         ></input>
-        <div className="error-message">{this.state.errorFamilyName}</div>
+        <div className={this.state.errorFamilyName ? "error-message" : "empty"}>
+          {this.state.errorFamilyName}
+        </div>
         <input
           value={phone}
           onChange={this.handelChange}
@@ -137,7 +140,9 @@ class Form extends React.Component {
           name="phone"
           placeholder="...شماره تماس"
         ></input>
-        <div className="error-message">{this.state.errorPhone}</div>
+        <div className={this.state.errorPhone ? "error-message" : "empty"}>
+          {this.state.errorPhone}
+        </div>
         <select
           onChange={this.handelChange}
           onInput={(e) => this.setState({ courseValue: e.target.value })}
@@ -159,7 +164,9 @@ class Form extends React.Component {
           name="email"
           placeholder="...ایمیل"
         ></input>
-        <div className="error-message">{this.state.errorEmail}</div>
+        <div className={this.state.errorEmail ? "error-message" : "empty"}>
+          {this.state.errorEmail}
+        </div>
         <input
           className="addBtn"
           type="submit"
@@ -171,3 +178,5 @@ class Form extends React.Component {
   }
 }
 export default Form;
+
+// className={this.state.errorEmail ? "error-message": "empty"}

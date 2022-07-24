@@ -5,16 +5,10 @@ import { FaEdit } from "react-icons/fa";
 import Modal from "../Modal";
 
 class ContactCard extends React.Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     showModal: false,
-  //   };
-  // }
-
   render() {
     const { id, fname, familyName, email, relation } = this.props.contact;
-    const { showModal, OpenModal, CloseModal, DeleteCard } = this.props;
+    const { showModal, OpenModal, CloseModal, DeleteCard, EditContact } =
+      this.props;
     return (
       <>
         <div className="card">
@@ -25,7 +19,7 @@ class ContactCard extends React.Component {
                   <FaTrashAlt size={30} />
                 </div>
                 <div className="icon__link">
-                  <FaEdit size={30} />
+                  <FaEdit size={30} onClick={() => EditContact(id)} />
                 </div>
               </div>
               <p className="card__title">

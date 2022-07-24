@@ -1,5 +1,5 @@
 .modal {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.2);
   position: fixed;
   top: 0;
   left: 0;
@@ -20,9 +20,25 @@
 }
 
 .ModalBtn {
+  transition: border-color 0.5s, background-color 0.5s, color;
   margin: 5px 10px;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 28px;
+  color: antiquewhite;
+  cursor: pointer;
+  text-align: center;
+}
+
+.yesBtn:hover {
+  background-color: #0f4425;
+}
+
+.noBtn:hover {
+  background-color: #761616;
+}
+
+.modalBox p {
+  text-align: right;
 }
 
 .yesBtn {
@@ -30,9 +46,13 @@
 }
 
 .noBtn {
-  background-color: firebrick;
+  background-color: #b22222;
 }
 
 .closeModal {
   cursor: pointer;
+}
+
+.btnContainer {
+  display: flex;
 }

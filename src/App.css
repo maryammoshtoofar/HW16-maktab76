@@ -5,6 +5,7 @@
 .contactsBody {
   display: flex;
   flex-wrap: wrap;
-  margin: 5px 20px;
+  justify-content: center;
+  margin: auto;
   gap: 5px;
 }
