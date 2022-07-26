@@ -20,16 +20,6 @@ class Form extends React.Component {
     defaultError = false;
   }
 
-  // Validate Form
-
-  validate = () => {
-    this.validateName();
-    this.validateFamilyName();
-    this.validatePhone();
-    this.validateEmail();
-    this.validateSelect();
-  };
-
   validateName = () => {
     const { fname } = this.props;
     if (fname === "") this.setState({ errorName: ".نام اجباری است" });
@@ -105,7 +95,7 @@ class Form extends React.Component {
         <h3>وب اپلیکیشن مدیریت مخاطبین</h3>
         <input
           value={fname}
-          onChange={(e) => this.props.handelChange(e, this.validate)}
+          onChange={(e) => this.props.handelChange(e, this.validateName)}
           type="text"
           name="fname"
           placeholder="...نام"
@@ -115,7 +105,7 @@ class Form extends React.Component {
         </div>
         <input
           value={familyName}
-          onChange={(e) => this.props.handelChange(e, this.validate)}
+          onChange={(e) => this.props.handelChange(e, this.validateFamilyName)}
           type="text"
           name="familyName"
           placeholder="...نام خانوادگی"
@@ -125,7 +115,7 @@ class Form extends React.Component {
         </div>
         <input
           value={phone}
-          onChange={(e) => this.props.handelChange(e, this.validate)}
+          onChange={(e) => this.props.handelChange(e, this.validatePhone)}
           type="text"
           name="phone"
           placeholder="...شماره تماس"
@@ -135,7 +125,7 @@ class Form extends React.Component {
         </div>
         <select
           value={relation}
-          onInput={(e) => this.props.handelChange(e, this.validate)}
+          onInput={(e) => this.props.handelChange(e, this.validateSelect)}
           name="relation"
           required
         >
@@ -152,7 +142,7 @@ class Form extends React.Component {
         </div>
         <input
           value={email}
-          onChange={(e) => this.props.handelChange(e, this.validate)}
+          onChange={(e) => this.props.handelChange(e, this.validateEmail())}
           type="email"
           name="email"
           placeholder="...ایمیل"
@@ -167,7 +157,6 @@ class Form extends React.Component {
           disabled={!isValid || defaultError}
         ></input>
       </form>
-      
     );
   }
 }
